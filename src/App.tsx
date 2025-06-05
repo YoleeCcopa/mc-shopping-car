@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
-import ProductData from './assets/products.json';
+import { getDefaultProducts } from './features/products/ProductRequest';
+import type { Producto } from './types/Types';
 
-import type { Producto } from './models/Models';
 import ProductDisplay from './components/products/ProductDisplay';
 
 function App() {
@@ -27,14 +27,7 @@ function App() {
             setCartState(JSON.parse(storedCart));
         } else {
             // fallback to JSON data if localStorage is empty
-            const mappedCart: Producto[] = ProductData
-            .map(item => ({
-                id: item.id,
-                nombre: item.nombre,
-                precio: item.precio,
-                descripcion: item.descripcion,
-                imagen: item.imagen
-            }));
+            const mappedCart = getDefaultProducts();
             updateCart(mappedCart);
         }
             console.log(storedCart);

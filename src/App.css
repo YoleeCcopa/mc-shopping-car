@@ -12,6 +12,8 @@
 
 body {
     font-family: var(--font-gfs-neohellenic);
+    color: var(--color-black);
+    background-color: var(--color-white);
 }
 
 h1 {

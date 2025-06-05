@@ -1,4 +1,4 @@
-import type { Producto } from './../../models/Models';
+import type { Producto } from '../../types/Types';
 import ProductItem from './ProductItem';
 
 interface Props {
