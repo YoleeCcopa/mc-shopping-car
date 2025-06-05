@@ -1,0 +1,79 @@
+[
+    {
+        "id":"de1331c96c49",
+        "nombre":"Hnefatafl",
+        "precio": 36000,
+        "descripcion":"Viking board game | from Brybelly",
+        "imagen":"https://www.ubuy.do/productimg/?image=aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNzF3TERhMFdZaUwuX0FDX1NMMTUwMF8uanBn.jpg"
+    },
+    {
+        "id":"58304e36f122",
+        "nombre":"Backgammon",
+        "precio": 60000,
+        "descripcion":"Tray, Premium 1.5 Inch Checkers & Dice Set | from Pointworks Store",
+        "imagen":"https://m.media-amazon.com/images/I/71iHuRMtnML.jpg"
+    },
+    {
+        "id":"7b196eb1784c",
+        "nombre":"Senet",
+        "precio": 50000,
+        "descripcion":"The Pharaoh's SENET Game hand made | from Hammer & Nail Woodworks",
+        "imagen":"https://i.etsystatic.com/23720500/r/il/5cf460/3220282567/il_fullxfull.3220282567_4i98.jpg"
+    },
+    {
+        "id":"dc2bcbe8afad",
+        "nombre":"Surakarta",
+        "precio": 15000,
+        "descripcion":"Glass marbles Indonesia board game | from Hammer & Nail Woodworks",
+        "imagen":"https://hammerandnailwoodworks.com/cdn/shop/products/IMG_7198_1946x.jpg?v=1675221445"
+    },
+    {
+        "id":"f2dedfe64a39",
+        "nombre":"The Royal Game of Ur",
+        "precio": 20000,
+        "descripcion":"Sumerian game hand made | from Hammer & Nail Woodworks",
+        "imagen":"https://hammerandnailwoodworks.com/cdn/shop/products/il_fullxfull.2620678276_rx5r_1946x.jpg?v=1642358545"
+    },
+    {
+        "id":"17077e493550",
+        "nombre":"GO",
+        "precio": 60000,
+        "descripcion":"100th Anniversary Memorial Miniature Go set | from Kurokigoishiten",
+        "imagen":"https://kurokigoishiten.com/cdn/shop/files/100_-02_bae8154d-ad8c-4ad9-9f3a-3b0334538484.jpg?v=1714023169"
+    },
+    {
+        "id":"aaa49ff4dd94",
+        "nombre":"Monopoly",
+        "precio": 60000,
+        "descripcion":"Monopoly Prism Glass Board Game | from Hauser",
+        "imagen":"https://hauserstores.com/cdn/shop/files/HSWSG44120_3.png?v=1739557361"
+    },
+    {
+        "id":"a4ed3b1f0671",
+        "nombre":"Catan basic",
+        "precio": 45000,
+        "descripcion":"Catan Board Game - Trade Build Settle | from Adventure Awaits",
+        "imagen":"https://www.adventureawaits.com.au/cdn/shop/products/catanplaying.jpg?v=1614161731"
+    },
+    {
+        "id":"6a837509e7b5",
+        "nombre":"Ludo Sushi Edition",
+        "precio": 35000,
+        "descripcion":"Classic Ludo game with original sushi-inspired | from ORIGINAL",
+        "imagen":"https://www.ohlssonlohaven.se/image/22615/ludo-board-game-ludoshi-wood-bamboo-27721D1.jpg"
+    },
+    {
+        "id":"dc4b22c2d5b8",
+        "nombre":"Mahjong",
+        "precio": 4000,
+        "descripcion":"Game set, smoke by GioBagnara | from Artedona",
+        "imagen":"https://src.artedona.com/generated/product/1/_NZx1/cb0c4461~69264_1.jpg"
+    },
+    {
+        "id":"29a4c58751db",
+        "nombre":"UNO Minimalista",
+        "precio": 5000,
+        "descripcion":"Special edition with minimalist aesthetic | from Play Division",
+        "imagen":"https://playdivision.pe/wp-content/uploads/2023/01/Uno-Minimalista-2.jpg"
+    }
+]
