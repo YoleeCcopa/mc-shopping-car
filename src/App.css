@@ -10,7 +10,7 @@
     --font-gfs-neohellenic: "GFS Neohellenic", sans-serif;
 }
 
-* {
+*, *::before, *::after {
     box-sizing: border-box;
 }
 

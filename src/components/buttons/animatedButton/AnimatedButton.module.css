@@ -1,0 +1,83 @@
+.animated_btn {
+    position: relative;
+    height: 2.5rem;
+    padding: 0 1rem;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    border-radius: .3rem;
+}
+
+/* --------------------------------------
+-------------- SLIDE EFFECT -------------
+-------------------------------------- */
+
+.animated_btn.slide::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--color-red);
+    z-index: -1;
+
+    transition: transform 300ms ease-in-out;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+.animated_btn.slide:hover::before,
+.animated_btn.slide:focus::before {
+    transform: scaleX(1);
+}
+
+.animated_btn.slide {
+    transition: color 300ms ease-in-out;
+    z-index: 1;
+}
+
+.animated_btn.slide:hover,
+.animated_btn.slide:focus {
+    color: var(--color-white);
+}
+
+/* --------------------------------------
+------------- CIRCLE EFFECT -------------
+-------------------------------------- */
+
+.animated_btn.circle::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--color-red);
+    z-index: -1;
+
+    border-radius: 50%;
+    transition: transform 500ms ease-in-out;
+    transform: scale(1.5);
+}
+
+.animated_btn.circle:hover::before,
+.animated_btn.circle:focus::before {
+    transform: scale(0);
+}
+
+.animated_btn.circle {
+    z-index: 1;
+    overflow: hidden;
+    background-color: var(--color-black);
+    transition: color 500ms ease-in-out;
+}
+
+.animated_btn.circle:hover,
+.animated_btn.circle:focus {
+    color: var(--color-white);
+}

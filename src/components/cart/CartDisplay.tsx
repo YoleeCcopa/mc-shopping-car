@@ -1,6 +1,7 @@
 import { CART_ACTIONS, type CartActions } from "../../features/reducers/CartActionTypes";
 import type { ItemCarrito } from "../../types/Types"
 import CartItem from "./CartItem";
+import AnimatedButton from '../buttons/animatedButton/AnimatedButton';
 
 interface Probs {
     data: ItemCarrito[];
@@ -27,7 +28,7 @@ const CartDisplay = ({ data, dispatch }: Probs) => {
                     }
                 </strong>
             </div>
-            <button onClick={() => handleClearCart()}>Clear cart</button>
+            <AnimatedButton backgroundEffect='slide' label='Clear cart' onClick={handleClearCart}/>
         </div>
     )
 }
