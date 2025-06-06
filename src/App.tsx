@@ -3,10 +3,12 @@ import './App.css'
 
 import { getDefaultProducts } from './features/products/ProductRequest';
 import type { Producto } from './types/Types';
-import { CART_ACTIONS, cartReducer, type CartState } from './features/reducers/CartActions';
+import { CART_ACTIONS } from './features/reducers/CartActionTypes';
+import { CartReducer, type CartState } from './features/reducers/CartActions';
 
 import ProductDisplay from './components/products/ProductDisplay';
 import SearchBar from './components/form/searchBar/SearchBar';
+import CartItem from './components/cart/CartItem';
 
 function App() {
     const initialState: CartState = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -15,7 +17,7 @@ function App() {
     const [allProducts, setAllProducts] = useState<Producto[]>([]);
 
     // Setup the cart state with useReducer
-    const [cartStatus, dispatch] = useReducer(cartReducer, initialState);
+    const [cartStatus, dispatch] = useReducer(CartReducer, initialState);
 
     /**
      * Support function to update task list in local storage.
@@ -65,47 +67,6 @@ function App() {
         });
     }
 
-    const handleRemoveItem = (productId: string) => {
-        dispatch({ 
-            type: CART_ACTIONS.REMOVE_ITEM, 
-            payload: productId 
-        });
-    };
-
-    const handleIncreaseQuantity = (itemId: string) => {
-        // Get the current item from the state (or use your state selector method)
-        const item = cartStatus.find(item => item.producto.id === itemId);
-
-        if (item) {
-            // Increase quantity by 1
-            const newQuantity = item.cantidad + 1;
-            dispatch({ 
-                type: CART_ACTIONS.UPDATE_QUANTITY, 
-                payload: { itemId, quantity: newQuantity } 
-            });
-        }
-    };
-
-    const handleDecreaseQuantity = (itemId: string) => {
-        // Get the current item from the state (or use your state selector method)
-        const item = cartStatus.find(item => item.producto.id === itemId);
-
-        if (item && item.cantidad > 1) {
-            // Decrease quantity by 1
-            const newQuantity = item.cantidad - 1;
-            dispatch({ 
-                type: CART_ACTIONS.UPDATE_QUANTITY, 
-                payload: { itemId, quantity: newQuantity } 
-            });
-        } else if (item && item.cantidad === 1) {
-            // Remove item completely if quantity is 1
-            dispatch({
-                type: CART_ACTIONS.REMOVE_ITEM,
-                payload: itemId,
-            });
-        }
-    };
-
     const handleClearCart = () => {
         dispatch({ type: CART_ACTIONS.CLEAR_CART });
     };
@@ -122,20 +83,11 @@ function App() {
             </div>
             <h2>Shopping cart</h2>
             <div>
-                {
-                    cartStatus.map((item) => (
-                        <div key={item.producto.id}>
-                            <span>{item.producto.nombre} | </span>
-                            <span>{item.producto.precio} | </span>
-                            <span>{item.cantidad} | </span>
-                            <span>{item.cantidad * item.producto.precio} | </span>
-                            <button onClick={() => {handleIncreaseQuantity(item.producto.id)}}>+</button>
-                            <button onClick={() => {handleDecreaseQuantity(item.producto.id)}}>-</button>
-                            <button onClick={() => {handleRemoveItem(item.producto.id)}}>Delete</button>
-                            <hr />
-                        </div>
-                    ))
-                }
+                {cartStatus.map((item) => (
+                    <div key={item.producto.id}>
+                        <CartItem data={item} dispatch={dispatch}/>
+                    </div>
+                ))}
                 <div>
                     <span>Total Price: </span>
                     <strong>
