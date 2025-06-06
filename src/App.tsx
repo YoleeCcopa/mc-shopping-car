@@ -10,7 +10,10 @@ import SearchBar from './components/form/searchBar/SearchBar';
 
 function App() {
     const initialState: CartState = JSON.parse(localStorage.getItem('cart') || '[]');
+    
     const [productState, setProductState] = useState<Producto[]>([]);
+    const [allProducts, setAllProducts] = useState<Producto[]>([]);
+    const [searchTerm, setSearchTerm] = useState<string>('');
 
     // Setup the cart state with useReducer
     const [cart, dispatch] = useReducer(cartReducer, initialState);
@@ -28,13 +31,16 @@ function App() {
      * Load data from local storage, or JSON if local is empty.
      */
     useEffect(() => {
-        const storedCart = localStorage.getItem('products');
-        if (storedCart) {
-            setProductState(JSON.parse(storedCart));
+        const storedProducts = localStorage.getItem('products');
+        if (storedProducts) {
+            const parsedProducts = JSON.parse(storedProducts);
+            setProductState(parsedProducts); // Set initial state of displayed products
+            setAllProducts(parsedProducts); // Set the full list of products
         } else {
-            // fallback to JSON data if localStorage is empty
-            const mappedCart = getDefaultProducts();
-            updateProducts(mappedCart);
+            const mappedProducts = getDefaultProducts(); // Assume you have a function to get default products
+            updateProducts(mappedProducts); // Assume this updates localStorage or similar
+            setAllProducts(mappedProducts); // Set the full list of products
+            setProductState(mappedProducts); // Display all products initially
         }
     }, []); 
 
@@ -45,11 +51,18 @@ function App() {
 
     // Function to handle search input change from SearchBar
     const handleSearchChange = (searchTerm: string) => {
-        // Filter the products based on the search term
-        const filteredProducts = productState.filter((product) =>
-            product.nombre.toLowerCase().includes(searchTerm.toLowerCase()) // Case-insensitive search
-        );
-        setProductState(filteredProducts); // Update the displayed product list
+        setSearchTerm(searchTerm); // Update the search term
+
+        if (searchTerm === '') {
+            // If the search term is empty, reset the products list to the full list
+            setProductState(allProducts);
+        } else {
+            // Filter the products based on the search term
+            const filteredProducts = allProducts.filter((product) =>
+                product.nombre.toLowerCase().includes(searchTerm.toLowerCase()) // Case-insensitive search
+            );
+            setProductState(filteredProducts); // Update the displayed product list with filtered products
+        }
     };
 
     const handleAddToCart = (product: Producto) => {
@@ -110,7 +123,7 @@ function App() {
             <br/>
             <h2>Product in stock</h2>
             <br/>
-            <SearchBar onSearchChange={handleSearchChange}/>
+            <SearchBar key='search_product' onSearchChange={handleSearchChange}/>
             <div>
                 <ProductDisplay data={productState} addToCart={handleAddToCart}/>
             </div>
