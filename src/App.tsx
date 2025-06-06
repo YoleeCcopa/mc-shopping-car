@@ -10,21 +10,32 @@ import SearchBar from './components/form/searchBar/SearchBar';
 import CartDisplay from './components/cart/CartDisplay';
 
 function App() {
+    /**
+     * Setup the cart initial state in local storage.
+     */
     const initialState: CartState = JSON.parse(localStorage.getItem('cart') || '[]');
     
+    /**
+     * Setup the products list, even when filtered.
+     */
     const [productState, setProductState] = useState<Producto[]>([]);
+    /**
+     * Setup all the products in the list.
+     */
     const [allProducts, setAllProducts] = useState<Producto[]>([]);
 
-    // Setup the cart state with useReducer
+    /**
+     * Setup the cart state with useReducer.
+     */
     const [cartStatus, dispatch] = useReducer(CartReducer, initialState);
 
     /**
-     * Support function to update task list in local storage.
-     * @param updatedList Task list with current modifications.
+     * Support function to update products list in local storage, hook productsState and hook allPorducts.
+     * @param updatedList Producto list with current modifications.
      */
     const updateProducts = (updatedList: Producto[]) => {
         setProductState(updatedList);
-        setAllProducts(updatedList); // Set the full list of products
+        setAllProducts(updatedList);
         localStorage.setItem('products', JSON.stringify(updatedList));
     };
 
@@ -40,12 +51,17 @@ function App() {
         }
     }, []);
 
-    // Save the cart to localStorage whenever it changes
+    /**
+     * Save the cart to localStorage whenever it changes. Dependency on cartStatus. 
+     */
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cartStatus));
-    }, [cartStatus]); // The effect runs every time the cart changes
+    }, [cartStatus]);
 
-    // Function to handle search input change from SearchBar
+    /**
+     * Function to handle search input change from SearchBar
+     * @param searchTerm String with the value to search in the list.
+     */
     const handleSearchChange = (searchTerm: string) => {
         if (searchTerm === '') {
             // If the search term is empty, reset the products list to the full list
@@ -53,7 +69,7 @@ function App() {
         } else {
             // Filter the products based on the search term
             const filteredProducts = allProducts.filter((product) =>
-                product.nombre.toLowerCase().includes(searchTerm.toLowerCase()) // Case-insensitive search
+                product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
             );
             setProductState(filteredProducts); // Update the displayed product list with filtered products
         }
