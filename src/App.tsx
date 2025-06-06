@@ -1,40 +1,67 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useReducer } from 'react'
 import './App.css'
 
 import { getDefaultProducts } from './features/products/ProductRequest';
 import type { Producto } from './types/Types';
+import { CART_ACTIONS, cartReducer, type CartState } from './features/reducers/CartAcctions';
 
 import ProductDisplay from './components/products/ProductDisplay';
 
 function App() {
-    const [cartState, setCartState] = useState<Producto[]>([]);
-    
+    const initialState: CartState = JSON.parse(localStorage.getItem('cart') || '[]');
+    const [productState, setProductState] = useState<Producto[]>([]);
+
+    // Setup the cart state with useReducer
+    const [cart, dispatch] = useReducer(cartReducer, initialState);
+
     /**
      * Support function to update task list in local storage.
      * @param updatedList Task list with current modifications.
      */
-    const updateCart = (updatedList: Producto[]) => {
-        setCartState(updatedList);
-        localStorage.setItem('cart', JSON.stringify(updatedList));
+    const updateProducts = (updatedList: Producto[]) => {
+        setProductState(updatedList);
+        localStorage.setItem('products', JSON.stringify(updatedList));
     };
 
     /**
      * Load data from local storage, or JSON if local is empty.
      */
     useEffect(() => {
-        const storedCart = localStorage.getItem('cart');
+        const storedCart = localStorage.getItem('products');
         if (storedCart) {
-            setCartState(JSON.parse(storedCart));
+            setProductState(JSON.parse(storedCart));
         } else {
             // fallback to JSON data if localStorage is empty
             const mappedCart = getDefaultProducts();
-            updateCart(mappedCart);
+            updateProducts(mappedCart);
         }
     }, []); 
 
-    const addToCart = (id: string) => {
-        console.log(id)
+    // Save the cart to localStorage whenever it changes
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart]); // The effect runs every time the cart changes
+
+    const addToCart = (product: Producto) => {
+        dispatch({ 
+            type: CART_ACTIONS.ADD_ITEM, 
+            payload: product 
+        });
     }
+
+    const removeItem = (productId: string) => {
+        dispatch({ 
+            type: CART_ACTIONS.REMOVE_ITEM, 
+            payload: productId 
+        });
+    };
+
+    const updateQuantity = (itemId: string, quantity: number) => {
+        dispatch({ 
+            type: CART_ACTIONS.UPDATE_QUANTITY, 
+            payload: { itemId, quantity } 
+        });
+    };
 
     return (
         <>
@@ -42,10 +69,20 @@ function App() {
             <br/>
             <h2>Product in stock</h2>
             <div>
-                <ProductDisplay data={cartState} addToCart={addToCart}/>
+                <ProductDisplay data={productState} addToCart={addToCart}/>
             </div>
             <h2>Shopping cart</h2>
             <div>
+                {
+                    cart.map((item) => (
+                        <div key={item.producto.id}>
+                            <span>{item.producto.nombre}</span>
+                            <span>{item.producto.precio}</span>
+                            <span>{item.cantidad}</span>
+                            <br />
+                        </div>
+                    ))
+                }
                 <button>Total price</button>
                 <button>Clear cart</button>
             </div>

@@ -2,7 +2,7 @@ import type { Producto } from '../../types/Types';
 
 interface Props {
     data: Producto;
-    addToCart: (id: string) => void;
+    addToCart: (product: Producto) => void;
 }
 
 const ProductItem = ({ data, addToCart }: Props) => {
@@ -10,7 +10,7 @@ const ProductItem = ({ data, addToCart }: Props) => {
         <div>
             <img src={data.imagen} alt="Logo" width={100}/>
             <span>{data.nombre}</span>
-            <button onClick={() => addToCart(data.id)}>Add</button>
+            <button onClick={() => addToCart(data)}>Add</button>
         </div>
     )
 }

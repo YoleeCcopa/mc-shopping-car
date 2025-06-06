@@ -3,7 +3,7 @@ import ProductItem from './ProductItem';
 
 interface Props {
     data: Producto[];
-    addToCart: (id: string) => void;
+    addToCart: (product: Producto) => void;
 }
 
 const ProductDisplay = ({ data, addToCart }: Props) => {
