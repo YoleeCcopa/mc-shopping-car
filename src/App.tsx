@@ -6,6 +6,7 @@ import type { Producto } from './types/Types';
 import { CART_ACTIONS, cartReducer, type CartState } from './features/reducers/CartAcctions';
 
 import ProductDisplay from './components/products/ProductDisplay';
+import SearchBar from './components/form/searchBar/SearchBar';
 
 function App() {
     const initialState: CartState = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -41,6 +42,15 @@ function App() {
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]); // The effect runs every time the cart changes
+
+    // Function to handle search input change from SearchBar
+    const handleSearchChange = (searchTerm: string) => {
+        // Filter the products based on the search term
+        const filteredProducts = productState.filter((product) =>
+            product.nombre.toLowerCase().includes(searchTerm.toLowerCase()) // Case-insensitive search
+        );
+        setProductState(filteredProducts); // Update the displayed product list
+    };
 
     const handleAddToCart = (product: Producto) => {
         dispatch({ 
@@ -99,6 +109,8 @@ function App() {
             <h1>E-commerce</h1>
             <br/>
             <h2>Product in stock</h2>
+            <br/>
+            <SearchBar onSearchChange={handleSearchChange}/>
             <div>
                 <ProductDisplay data={productState} addToCart={handleAddToCart}/>
             </div>
