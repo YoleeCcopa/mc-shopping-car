@@ -3,14 +3,15 @@ import type { Producto, ItemCarrito } from "../../types/Types";
 export const CART_ACTIONS = {
 	ADD_ITEM: 'add-item',
 	REMOVE_ITEM: 'remove-item',
-    UPDATE_QUANTITY: 'update-quantity'
+    UPDATE_QUANTITY: 'update-quantity',
+    CLEAR_CART: 'clear-cart'
 } as const;
 
 type CartActionType = typeof CART_ACTIONS[keyof typeof CART_ACTIONS];
 
 interface CartActions {
   type: CartActionType;
-  payload: Producto | string | { itemId: string; quantity: number };
+  payload?: Producto | string | { itemId: string; quantity: number };
 }
 
 export type CartState = ItemCarrito[];
@@ -46,6 +47,9 @@ export const cartReducer = (state: CartState, action: CartActions): CartState =>
                 ? { ...item, cant: quantity }
                 : item
             );
+        }
+        case CART_ACTIONS.CLEAR_CART: {
+            return [];
         }
         default:
             return state;

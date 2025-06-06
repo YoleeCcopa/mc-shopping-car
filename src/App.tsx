@@ -42,7 +42,7 @@ function App() {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]); // The effect runs every time the cart changes
 
-    const addToCart = (product: Producto) => {
+    const handleAddToCart = (product: Producto) => {
         dispatch({ 
             type: CART_ACTIONS.ADD_ITEM, 
             payload: product 
@@ -63,13 +63,17 @@ function App() {
         });
     };
 
+    const handleClearCart = () => {
+        dispatch({ type: CART_ACTIONS.CLEAR_CART });
+    };
+
     return (
         <>
             <h1>E-commerce</h1>
             <br/>
             <h2>Product in stock</h2>
             <div>
-                <ProductDisplay data={productState} addToCart={addToCart}/>
+                <ProductDisplay data={productState} addToCart={handleAddToCart}/>
             </div>
             <h2>Shopping cart</h2>
             <div>
@@ -79,12 +83,13 @@ function App() {
                             <span>{item.producto.nombre}</span>
                             <span>{item.producto.precio}</span>
                             <span>{item.cantidad}</span>
+                            <button onClick={() => {removeItem(item.producto.id)}}>Delete</button>
                             <br />
                         </div>
                     ))
                 }
                 <button>Total price</button>
-                <button>Clear cart</button>
+                <button onClick={() => handleClearCart()}>Clear cart</button>
             </div>
         </>
     )
