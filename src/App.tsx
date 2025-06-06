@@ -3,12 +3,11 @@ import './App.css'
 
 import { getDefaultProducts } from './features/products/ProductRequest';
 import type { Producto } from './types/Types';
-import { CART_ACTIONS } from './features/reducers/CartActionTypes';
 import { CartReducer, type CartState } from './features/reducers/CartActions';
 
 import ProductDisplay from './components/products/ProductDisplay';
 import SearchBar from './components/form/searchBar/SearchBar';
-import CartItem from './components/cart/CartItem';
+import CartDisplay from './components/cart/CartDisplay';
 
 function App() {
     const initialState: CartState = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -60,44 +59,16 @@ function App() {
         }
     };
 
-    const handleAddToCart = (product: Producto) => {
-        dispatch({ 
-            type: CART_ACTIONS.ADD_ITEM, 
-            payload: product 
-        });
-    }
-
-    const handleClearCart = () => {
-        dispatch({ type: CART_ACTIONS.CLEAR_CART });
-    };
-
     return (
         <>
             <h1>E-commerce</h1>
             <br/>
             <h2>Product in stock</h2>
             <br/>
-            <SearchBar key='search_product' onSearchChange={handleSearchChange}/>
-            <div>
-                <ProductDisplay data={productState} addToCart={handleAddToCart}/>
-            </div>
+            <SearchBar id='search_product' onSearchChange={handleSearchChange}/>
+            <ProductDisplay data={productState} dispatch={dispatch}/>
             <h2>Shopping cart</h2>
-            <div>
-                {cartStatus.map((item) => (
-                    <div key={item.producto.id}>
-                        <CartItem data={item} dispatch={dispatch}/>
-                    </div>
-                ))}
-                <div>
-                    <span>Total Price: </span>
-                    <strong>
-                        {
-                            cartStatus.reduce((total, item) => total + (item.producto.precio * item.cantidad), 0)
-                        }
-                    </strong>
-                </div>
-                <button onClick={() => handleClearCart()}>Clear cart</button>
-            </div>
+            <CartDisplay data={cartStatus} dispatch={dispatch}/>
         </>
     )
 }

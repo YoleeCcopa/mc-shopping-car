@@ -1,17 +1,25 @@
+import { CART_ACTIONS, type CartActions } from '../../features/reducers/CartActionTypes';
 import type { Producto } from '../../types/Types';
 
 interface Props {
     data: Producto;
-    addToCart: (product: Producto) => void;
+    dispatch: React.Dispatch<CartActions>;
 }
 
-const ProductItem = ({ data, addToCart }: Props) => {
+const ProductItem = ({ data, dispatch }: Props) => {
+    const handleAddToCart = (product: Producto) => {
+        dispatch({ 
+            type: CART_ACTIONS.ADD_ITEM, 
+            payload: product 
+        });
+    }
+
     return (
-        <div>
+        <>
             <img src={data.imagen} alt="Logo" width={100}/>
             <span>{data.nombre}</span>
-            <button onClick={() => addToCart(data)}>Add</button>
-        </div>
+            <button onClick={() => handleAddToCart(data)}>Add</button>
+        </>
     )
 }
 

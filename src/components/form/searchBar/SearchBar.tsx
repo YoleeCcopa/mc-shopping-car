@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 interface Probs {
-    key: string;
+    id: string;
     onSearchChange: (searchTerm: string) => void;
 }
 
-const SearchBar = ({ key, onSearchChange }: Probs) => {
+const SearchBar = ({ id: key, onSearchChange }: Probs) => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

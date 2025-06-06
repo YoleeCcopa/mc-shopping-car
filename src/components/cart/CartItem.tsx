@@ -40,7 +40,7 @@ const CartItem = ({ data, dispatch }: Props) => {
     };
 
   return (
-        <div>
+        <>
             <span>{data.producto.nombre} | </span>
             <span>{data.producto.precio} | </span>
             <span>{data.cantidad} | </span>
@@ -48,7 +48,7 @@ const CartItem = ({ data, dispatch }: Props) => {
             <button onClick={() => handleIncreaseQuantity(data.producto.id)}>+</button>
             <button onClick={() => handleDecreaseQuantity(data.producto.id)}>-</button>
             <button onClick={() => handleRemoveItem(data.producto.id)}>Delete</button>
-        </div>
+        </>
   )
 }
 
