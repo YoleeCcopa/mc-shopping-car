@@ -3,7 +3,7 @@ import './App.css'
 
 import { getDefaultProducts } from './features/products/ProductRequest';
 import type { Producto } from './types/Types';
-import { CART_ACTIONS, cartReducer, type CartState } from './features/reducers/CartAcctions';
+import { CART_ACTIONS, cartReducer, type CartState } from './features/reducers/CartActions';
 
 import ProductDisplay from './components/products/ProductDisplay';
 import SearchBar from './components/form/searchBar/SearchBar';
@@ -13,10 +13,9 @@ function App() {
     
     const [productState, setProductState] = useState<Producto[]>([]);
     const [allProducts, setAllProducts] = useState<Producto[]>([]);
-    const [searchTerm, setSearchTerm] = useState<string>('');
 
     // Setup the cart state with useReducer
-    const [cart, dispatch] = useReducer(cartReducer, initialState);
+    const [cartStatus, dispatch] = useReducer(cartReducer, initialState);
 
     /**
      * Support function to update task list in local storage.
@@ -24,6 +23,7 @@ function App() {
      */
     const updateProducts = (updatedList: Producto[]) => {
         setProductState(updatedList);
+        setAllProducts(updatedList); // Set the full list of products
         localStorage.setItem('products', JSON.stringify(updatedList));
     };
 
@@ -33,26 +33,19 @@ function App() {
     useEffect(() => {
         const storedProducts = localStorage.getItem('products');
         if (storedProducts) {
-            const parsedProducts = JSON.parse(storedProducts);
-            setProductState(parsedProducts); // Set initial state of displayed products
-            setAllProducts(parsedProducts); // Set the full list of products
+            updateProducts(JSON.parse(storedProducts));
         } else {
-            const mappedProducts = getDefaultProducts(); // Assume you have a function to get default products
-            updateProducts(mappedProducts); // Assume this updates localStorage or similar
-            setAllProducts(mappedProducts); // Set the full list of products
-            setProductState(mappedProducts); // Display all products initially
+            updateProducts(getDefaultProducts());
         }
-    }, []); 
+    }, []);
 
     // Save the cart to localStorage whenever it changes
     useEffect(() => {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }, [cart]); // The effect runs every time the cart changes
+        localStorage.setItem('cart', JSON.stringify(cartStatus));
+    }, [cartStatus]); // The effect runs every time the cart changes
 
     // Function to handle search input change from SearchBar
     const handleSearchChange = (searchTerm: string) => {
-        setSearchTerm(searchTerm); // Update the search term
-
         if (searchTerm === '') {
             // If the search term is empty, reset the products list to the full list
             setProductState(allProducts);
@@ -81,7 +74,7 @@ function App() {
 
     const handleIncreaseQuantity = (itemId: string) => {
         // Get the current item from the state (or use your state selector method)
-        const item = cart.find(item => item.producto.id === itemId);
+        const item = cartStatus.find(item => item.producto.id === itemId);
 
         if (item) {
             // Increase quantity by 1
@@ -95,7 +88,7 @@ function App() {
 
     const handleDecreaseQuantity = (itemId: string) => {
         // Get the current item from the state (or use your state selector method)
-        const item = cart.find(item => item.producto.id === itemId);
+        const item = cartStatus.find(item => item.producto.id === itemId);
 
         if (item && item.cantidad > 1) {
             // Decrease quantity by 1
@@ -130,7 +123,7 @@ function App() {
             <h2>Shopping cart</h2>
             <div>
                 {
-                    cart.map((item) => (
+                    cartStatus.map((item) => (
                         <div key={item.producto.id}>
                             <span>{item.producto.nombre} | </span>
                             <span>{item.producto.precio} | </span>
@@ -147,7 +140,7 @@ function App() {
                     <span>Total Price: </span>
                     <strong>
                         {
-                            cart.reduce((total, item) => total + (item.producto.precio * item.cantidad), 0)
+                            cartStatus.reduce((total, item) => total + (item.producto.precio * item.cantidad), 0)
                         }
                     </strong>
                 </div>
