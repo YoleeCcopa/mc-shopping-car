@@ -1,4 +1,6 @@
-.animated_btn {
+/* source: https://www.youtube.com/watch?v=cH0TC9gWiAg&t=43s */
+
+.animated_btn, .animated_icon, .animated_icon_txt {
     position: relative;
     height: 2.5rem;
     padding: 0 1rem;
@@ -10,13 +12,30 @@
     overflow: hidden;
     z-index: 1;
     border-radius: .3rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.animated_icon {
+    padding: 0 .5rem;
+}
+
+.animated_icon_txt {
+    padding: 0 .5rem;
+}
+
+.animated_icon_txt i {
+  font-size: 18px;
+  display: inline-block;
+  margin-right: 8px; /* Space between icon and text */
 }
 
 /* --------------------------------------
 -------------- SLIDE EFFECT -------------
 -------------------------------------- */
 
-.animated_btn.slide::before {
+.slide::before {
     content: "";
     position: absolute;
     top: 0;
@@ -31,18 +50,18 @@
     transform-origin: left;
 }
 
-.animated_btn.slide:hover::before,
-.animated_btn.slide:focus::before {
+.slide:hover::before,
+.slide:focus::before {
     transform: scaleX(1);
 }
 
-.animated_btn.slide {
+.slide {
     transition: color 300ms ease-in-out;
     z-index: 1;
 }
 
-.animated_btn.slide:hover,
-.animated_btn.slide:focus {
+.slide:hover,
+.slide:focus {
     color: var(--color-white);
 }
 
@@ -50,7 +69,7 @@
 ------------- CIRCLE EFFECT -------------
 -------------------------------------- */
 
-.animated_btn.circle::before {
+.circle::before {
     content: "";
     position: absolute;
     top: 0;
@@ -65,19 +84,19 @@
     transform: scale(1.5);
 }
 
-.animated_btn.circle:hover::before,
-.animated_btn.circle:focus::before {
+.circle:hover::before,
+.circle:focus::before {
     transform: scale(0);
 }
 
-.animated_btn.circle {
+.circle {
     z-index: 1;
     overflow: hidden;
     background-color: var(--color-black);
     transition: color 500ms ease-in-out;
 }
 
-.animated_btn.circle:hover,
-.animated_btn.circle:focus {
+.circle:hover,
+.circle:focus {
     color: var(--color-white);
 }

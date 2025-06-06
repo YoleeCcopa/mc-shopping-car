@@ -40,17 +40,17 @@ const CartItem = ({ data, dispatch }: Props) => {
         });
     };
 
-  return (
+    return (
         <>
             <span>{data.producto.nombre} | </span>
             <span>{data.producto.precio} | </span>
             <span>{data.cantidad} | </span>
             <span>{data.cantidad * data.producto.precio} | </span>
-            <AnimatedButton backgroundEffect='circle' label='+' data={data.producto.id} onClick={handleIncreaseQuantity}/>
-            <AnimatedButton backgroundEffect='circle' label='-' data={data.producto.id} onClick={handleDecreaseQuantity}/>
-            <AnimatedButton backgroundEffect='slide' label='Delete' data={data.producto.id} onClick={handleRemoveItem}/>
+            <AnimatedButton backgroundEffect='circle' label={null} iconClass='uil__plus' data={data.producto.id} handleClick={handleIncreaseQuantity}/>
+            <AnimatedButton backgroundEffect='circle' label={null} iconClass='uil__minus' data={data.producto.id} handleClick={handleDecreaseQuantity}/>
+            <AnimatedButton backgroundEffect='slide' label='Delete' data={data.producto.id} handleClick={handleRemoveItem}/>
         </>
-  )
+    )
 }
 
 export default CartItem

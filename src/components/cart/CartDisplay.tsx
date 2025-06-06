@@ -28,7 +28,7 @@ const CartDisplay = ({ data, dispatch }: Probs) => {
                     }
                 </strong>
             </div>
-            <AnimatedButton backgroundEffect='slide' label='Clear cart' onClick={handleClearCart}/>
+            <AnimatedButton backgroundEffect='slide' label='Clear cart' handleClick={handleClearCart}/>
         </div>
     )
 }
