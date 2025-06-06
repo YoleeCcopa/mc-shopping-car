@@ -1,42 +1,25 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Averia+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Enriqueta:wght@400;500;600;700&family=GFS+Neohellenic:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+    --color-red: #e21c2a;
+    --color-orange: #f58b14;
+    --color-white: #fefefe;
+    --color-black: #1e0c0d;
+    --font-enriqueta: "Enriqueta", serif;
+    --font-averia-libre: "Averia Libre", system-ui;
+    --font-gfs-neohellenic: "GFS Neohellenic", sans-serif;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+    font-family: var(--font-gfs-neohellenic);
+    color: var(--color-black);
+    background-color: var(--color-white);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1 {
+    font-family: var(--font-averia-libre);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+h2, h3, h4, h5, h6 {
+    font-family: var(--font-enriqueta);
 }
