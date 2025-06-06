@@ -107,13 +107,14 @@ function App() {
                 {
                     cart.map((item) => (
                         <div key={item.producto.id}>
-                            <span>{item.producto.nombre}</span>
-                            <span>{item.producto.precio}</span>
-                            <span>{item.cantidad}</span>
+                            <span>{item.producto.nombre} | </span>
+                            <span>{item.producto.precio} | </span>
+                            <span>{item.cantidad} | </span>
+                            <span>{item.cantidad * item.producto.precio} | </span>
                             <button onClick={() => {handleIncreaseQuantity(item.producto.id)}}>+</button>
                             <button onClick={() => {handleDecreaseQuantity(item.producto.id)}}>-</button>
                             <button onClick={() => {handleRemoveItem(item.producto.id)}}>Delete</button>
-                            <br />
+                            <hr />
                         </div>
                     ))
                 }
