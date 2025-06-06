@@ -118,7 +118,14 @@ function App() {
                         </div>
                     ))
                 }
-                <button>Total price</button>
+                <div>
+                    <span>Total Price: </span>
+                    <strong>
+                        {
+                            cart.reduce((total, item) => total + (item.producto.precio * item.cantidad), 0)
+                        }
+                    </strong>
+                </div>
                 <button onClick={() => handleClearCart()}>Clear cart</button>
             </div>
         </>
