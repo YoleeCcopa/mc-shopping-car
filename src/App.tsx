@@ -30,8 +30,11 @@ function App() {
             const mappedCart = getDefaultProducts();
             updateCart(mappedCart);
         }
-            console.log(storedCart);
     }, []); 
+
+    const addToCart = (id: string) => {
+        console.log(id)
+    }
 
     return (
         <>
@@ -39,7 +42,7 @@ function App() {
             <br/>
             <h2>Product in stock</h2>
             <div>
-                <ProductDisplay data={cartState}/>
+                <ProductDisplay data={cartState} addToCart={addToCart}/>
             </div>
             <h2>Shopping cart</h2>
             <div>

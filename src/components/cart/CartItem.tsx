@@ -2,17 +2,17 @@ import type { Producto } from '../../types/Types';
 
 interface Props {
     data: Producto;
-    addToCart: (id: string) => void;
+    deleteFromCart: (id: string) => void;
 }
 
-const ProductItem = ({ data, addToCart }: Props) => {
-    return (
+const CartItem = ({ data, deleteFromCart }: Props) => {
+  return (
         <div>
             <img src={data.imagen} alt="Logo" width={100}/>
             <span>{data.nombre}</span>
-            <button onClick={() => addToCart(data.id)}>Add</button>
+            <button onClick={() => deleteFromCart(data.id)}>Add</button>
         </div>
-    )
+  )
 }
 
-export default ProductItem
+export default CartItem

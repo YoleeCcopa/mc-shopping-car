@@ -3,13 +3,14 @@ import ProductItem from './ProductItem';
 
 interface Props {
     data: Producto[];
+    addToCart: (id: string) => void;
 }
 
-const ProductDisplay = ({ data }: Props) => {
+const ProductDisplay = ({ data, addToCart }: Props) => {
     return (
         <>
             {data.map((item) => (
-                <ProductItem data={item}/>
+                <ProductItem data={item} addToCart={addToCart}/>
             ))}
         </>
     )
