@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./SearchBar.module.css";
 
 interface Probs {
     id: string;
@@ -20,13 +21,15 @@ const SearchBar = ({ id: key, onSearchChange }: Probs) => {
     };
 
     return (
-        <div>
-            <input id={key} 
-            type="text" 
-            onChange={handleChange}
-            value={searchTerm}/>
-            <button onClick={handleClear}>Clear</button>
-            <label htmlFor={key}>Search</label>
+        <div className={styles.search_bar}>
+            <div className={styles.input_container}>
+                <input className={styles.search_txt} id={key} 
+                type="text" 
+                onChange={handleChange}
+                value={searchTerm}/>
+                <button className={styles.clear_btn} onClick={handleClear}>Clear</button>
+            </div>
+            <label className={styles.label} htmlFor={key}>Search</label>
         </div>
     )
 }

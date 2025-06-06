@@ -1,5 +1,6 @@
 import type { ItemCarrito } from '../../types/Types';
 import { CART_ACTIONS, type CartActions } from '../../features/reducers/CartActionTypes';
+import CircleAnimationButton from '../buttons/circleAnimationButton/CircleAnimationButton';
 
 interface Props {
     data: ItemCarrito;
@@ -45,9 +46,9 @@ const CartItem = ({ data, dispatch }: Props) => {
             <span>{data.producto.precio} | </span>
             <span>{data.cantidad} | </span>
             <span>{data.cantidad * data.producto.precio} | </span>
-            <button onClick={() => handleIncreaseQuantity(data.producto.id)}>+</button>
-            <button onClick={() => handleDecreaseQuantity(data.producto.id)}>-</button>
-            <button onClick={() => handleRemoveItem(data.producto.id)}>Delete</button>
+            <CircleAnimationButton label='+' data={data.producto.id} onClick={handleIncreaseQuantity}/>
+            <CircleAnimationButton label='-' data={data.producto.id} onClick={handleDecreaseQuantity}/>
+            <CircleAnimationButton label='Delete' data={data.producto.id} onClick={handleRemoveItem}/>
         </>
   )
 }

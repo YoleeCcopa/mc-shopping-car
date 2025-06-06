@@ -10,10 +10,15 @@
     --font-gfs-neohellenic: "GFS Neohellenic", sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: var(--font-gfs-neohellenic);
     color: var(--color-black);
     background-color: var(--color-white);
+    font-size: 16px;
 }
 
 h1 {
