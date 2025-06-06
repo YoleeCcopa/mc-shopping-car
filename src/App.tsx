@@ -49,18 +49,45 @@ function App() {
         });
     }
 
-    const removeItem = (productId: string) => {
+    const handleRemoveItem = (productId: string) => {
         dispatch({ 
             type: CART_ACTIONS.REMOVE_ITEM, 
             payload: productId 
         });
     };
 
-    const updateQuantity = (itemId: string, quantity: number) => {
-        dispatch({ 
-            type: CART_ACTIONS.UPDATE_QUANTITY, 
-            payload: { itemId, quantity } 
-        });
+    const handleIncreaseQuantity = (itemId: string) => {
+        // Get the current item from the state (or use your state selector method)
+        const item = cart.find(item => item.producto.id === itemId);
+
+        if (item) {
+            // Increase quantity by 1
+            const newQuantity = item.cantidad + 1;
+            dispatch({ 
+                type: CART_ACTIONS.UPDATE_QUANTITY, 
+                payload: { itemId, quantity: newQuantity } 
+            });
+        }
+    };
+
+    const handleDecreaseQuantity = (itemId: string) => {
+        // Get the current item from the state (or use your state selector method)
+        const item = cart.find(item => item.producto.id === itemId);
+
+        if (item && item.cantidad > 1) {
+            // Decrease quantity by 1
+            const newQuantity = item.cantidad - 1;
+            dispatch({ 
+                type: CART_ACTIONS.UPDATE_QUANTITY, 
+                payload: { itemId, quantity: newQuantity } 
+            });
+        } else if (item && item.cantidad === 1) {
+            // Remove item completely if quantity is 1
+            dispatch({
+                type: CART_ACTIONS.REMOVE_ITEM,
+                payload: itemId,
+            });
+        }
     };
 
     const handleClearCart = () => {
@@ -83,7 +110,9 @@ function App() {
                             <span>{item.producto.nombre}</span>
                             <span>{item.producto.precio}</span>
                             <span>{item.cantidad}</span>
-                            <button onClick={() => {removeItem(item.producto.id)}}>Delete</button>
+                            <button onClick={() => {handleIncreaseQuantity(item.producto.id)}}>+</button>
+                            <button onClick={() => {handleDecreaseQuantity(item.producto.id)}}>-</button>
+                            <button onClick={() => {handleRemoveItem(item.producto.id)}}>Delete</button>
                             <br />
                         </div>
                     ))

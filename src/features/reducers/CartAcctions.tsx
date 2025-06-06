@@ -44,7 +44,7 @@ export const cartReducer = (state: CartState, action: CartActions): CartState =>
             // Update quantity based on itemId
             return state.map(item =>
                 item.producto.id === itemId
-                ? { ...item, cant: quantity }
+                ? { ...item, cantidad: quantity }
                 : item
             );
         }
