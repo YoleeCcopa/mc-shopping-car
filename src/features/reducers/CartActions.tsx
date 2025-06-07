@@ -1,22 +1,9 @@
 import type { Producto, ItemCarrito } from "../../types/Types";
-
-export const CART_ACTIONS = {
-	ADD_ITEM: 'add-item',
-	REMOVE_ITEM: 'remove-item',
-    UPDATE_QUANTITY: 'update-quantity',
-    CLEAR_CART: 'clear-cart'
-} as const;
-
-type CartActionType = typeof CART_ACTIONS[keyof typeof CART_ACTIONS];
-
-interface CartActions {
-  type: CartActionType;
-  payload?: Producto | string | { itemId: string; quantity: number };
-}
+import { CART_ACTIONS, type CartActions } from "./CartActionTypes";
 
 export type CartState = ItemCarrito[];
 
-export const cartReducer = (state: CartState, action: CartActions): CartState => {
+export const CartReducer = (state: CartState, action: CartActions): CartState => {
     switch (action.type) {
         case CART_ACTIONS.ADD_ITEM:{
             const newProduct = action.payload as Producto;

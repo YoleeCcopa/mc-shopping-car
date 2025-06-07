@@ -1,54 +1,50 @@
-# React + TypeScript + Vite
+# Akabeko e-shop
+Basic shop with a list of board games as products.
+> Last edit June 06, 2025
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## How to start
+We are using `react 19.1.0`, to get all the necessary files, apply:
 
-Currently, two official plugins are available:
+```cmd
+npm install
+```
+After installing the necessary modules, run the following command to open the application.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```cmd
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Hooks implementation
+In the application you can find `useState`, `useEffect` and `useReducer`. The following tables will show the uses of each.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Hook `useState`
+| Name  | Type | Function |
+| :---: | :---: | :--- |
+| `[searchTerm, setSearchTerm]` | `string` | Keep track of the content of the search bar input. Found in: component `SearchBar` |
+| `[productState, setProductState]` | `Producto[]` | Keep track of the list of products, even when filtered. Found in: `App.tsx` |
+| `[allProducts, setAllProducts]` | `Producto[]` | Keep track of the list of all products, much like a safe copy. Found in: `App.tsx` |
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### Hook `useEffect`
+| Dependencies  | Function |
+| :---: | :--- |
+| `none`  | Load list of products from local storage (JSON file if there is no data). Found in: `App.tsx` |
+| `cartStatus` | Save cart content in local storage each time `cartStatus` changes (check reducer section). Found in: `App.tsx` |
+
+### Hook `useReducer`
+For the reducer `[cartStatus, dispatch] = useReducer(cartReducer, initialState)`. Fount in: `App.tsx` and `CartActions`.
+| Function | Effect |
+| :---: | :--- |
+| `ADD_ITEM` | Add a `Producto` to cart or increase the quantity of the existing `Producto`. |
+| `REMOVE_ITEM` | Remove a `Producto` from cart by id. |
+| `UPDATE_QUANTITY` | Update the quantity of a `Producto` from cart by id. You can set the efect to apply to quantity. |
+| `CLEAR_CART` | Clear the list of `Producto` of cart. |
+
+## App features
+- List of products:
+  - Search product by name.
+  - Add product to shopping cart.
+- Shopping cart:
+  - Delete selected product.
+  - Add unit of the selected product.
+  - Remove a unit of the selected product.
+  - Obtain the total price of the products.

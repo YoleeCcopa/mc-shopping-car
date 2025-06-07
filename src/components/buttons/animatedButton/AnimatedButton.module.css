@@ -1,0 +1,102 @@
+/* source: https://www.youtube.com/watch?v=cH0TC9gWiAg&t=43s */
+
+.animated_btn, .animated_icon, .animated_icon_txt {
+    position: relative;
+    height: 2.5rem;
+    padding: 0 1rem;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    border-radius: .3rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.animated_icon {
+    padding: 0 .5rem;
+}
+
+.animated_icon_txt {
+    padding: 0 .5rem;
+}
+
+.animated_icon_txt i {
+  font-size: 18px;
+  display: inline-block;
+  margin-right: 8px; /* Space between icon and text */
+}
+
+/* --------------------------------------
+-------------- SLIDE EFFECT -------------
+-------------------------------------- */
+
+.slide::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--color-red);
+    z-index: -1;
+
+    transition: transform 300ms ease-in-out;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+.slide:hover::before,
+.slide:focus::before {
+    transform: scaleX(1);
+}
+
+.slide {
+    transition: color 300ms ease-in-out;
+    z-index: 1;
+}
+
+.slide:hover,
+.slide:focus {
+    color: var(--color-white);
+}
+
+/* --------------------------------------
+------------- CIRCLE EFFECT -------------
+-------------------------------------- */
+
+.circle::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--color-red);
+    z-index: -1;
+
+    border-radius: 50%;
+    transition: transform 500ms ease-in-out;
+    transform: scale(1.5);
+}
+
+.circle:hover::before,
+.circle:focus::before {
+    transform: scale(0);
+}
+
+.circle {
+    z-index: 1;
+    overflow: hidden;
+    background-color: var(--color-black);
+    transition: color 500ms ease-in-out;
+}
+
+.circle:hover,
+.circle:focus {
+    color: var(--color-white);
+}

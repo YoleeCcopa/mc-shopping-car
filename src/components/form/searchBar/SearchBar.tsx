@@ -1,11 +1,13 @@
 import { useState } from "react";
+import styles from "./SearchBar.module.css";
+import "./../../../assets/_icon.css";
 
 interface Probs {
-    key: string;
+    id: string;
     onSearchChange: (searchTerm: string) => void;
 }
 
-const SearchBar = ({ key, onSearchChange }: Probs) => {
+const SearchBar = ({ id: key, onSearchChange }: Probs) => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,13 +22,32 @@ const SearchBar = ({ key, onSearchChange }: Probs) => {
     };
 
     return (
-        <div>
-            <input id={key} 
+        <div className={styles.search_bar}>
+            <input className={styles.search_txt}
+            id={key} 
             type="text" 
             onChange={handleChange}
-            value={searchTerm}/>
-            <button onClick={handleClear}>Clear</button>
-            <label htmlFor={key}>Search</label>
+            value={searchTerm}
+            aria-describedby={`${key}-label`}/>
+
+            <div className={styles.input_actions}>
+            {searchTerm ? (
+                <button
+                className={styles.clear_btn}
+                onClick={handleClear}
+                aria-label="Clear search term">
+                    <i className="uil__multiply"></i>
+                </button>
+            ) : (
+                <label
+                className={styles.label}
+                htmlFor={key}
+                id={`${key}-label`}>
+                    <i className="uil__search-alt" aria-hidden="true"></i>
+                    <span className={styles.sr_only}>Search product</span>
+                </label>
+            )}
+            </div>
         </div>
     )
 }

@@ -1,0 +1,28 @@
+/*
+    sources:
+    https://www.youtube.com/watch?app=desktop&v=VTJ_0MplSwk
+    https://www.youtube.com/watch?v=HOUMF5qMAbA
+*/
+
+.displayer {
+    padding: 1rem;
+    background-color: var(--color-black);
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    grid-auto-rows: auto;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.displayer .card {
+    background-color: var(--color-white);
+    width: 100%;
+    padding: 1rem;
+}
+
+.displayer .alert {
+    background-color: var(--color-white);
+    padding: 1rem;
+    border-radius: .3rem;
+}

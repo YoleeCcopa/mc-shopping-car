@@ -1,18 +1,28 @@
+import type { CartActions } from '../../features/reducers/CartActionTypes';
 import type { Producto } from '../../types/Types';
 import ProductItem from './ProductItem';
+import styles from './ProductDisplay.module.css';
 
 interface Props {
     data: Producto[];
-    addToCart: (product: Producto) => void;
+    dispatch: React.Dispatch<CartActions>;
 }
 
-const ProductDisplay = ({ data, addToCart }: Props) => {
+const ProductDisplay = ({ data, dispatch }: Props) => {
     return (
-        <>
-            {data.map((item) => (
-                <ProductItem data={item} addToCart={addToCart}/>
-            ))}
-        </>
+        <div className={styles.displayer}>
+            {data.length === 0 ? (
+                <div className={styles.alert}>
+                    <p>None found!</p>
+                </div>
+            ) : (
+            data.map((item) => (
+                <div key={item.id} className={styles.card}>
+                    <ProductItem data={item} dispatch={dispatch}/>
+                </div>
+            ))
+            )}
+        </div>
     )
 }
 
