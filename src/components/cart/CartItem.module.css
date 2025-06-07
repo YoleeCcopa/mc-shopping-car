@@ -1,0 +1,42 @@
+.card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card_data {
+    display: flex;
+    width: 100%;
+    gap: .5rem;
+    align-items: center;
+}
+
+.card_data .img_container {
+    width: 45%;
+    border-radius: .5rem;
+}
+
+.card_data .img_container .card_img {
+    width: 100%;
+    border-radius: .5rem;
+}
+
+.card_data .data_details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card_data .data_details .name {
+    font-size: 1.5rem;
+    font-family: var(--font-averia-libre);
+}
+
+.card_actions {
+    display: flex;
+    width: 100%;
+    gap: .5rem;
+    margin-top: .5rem;
+}

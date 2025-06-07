@@ -45,3 +45,64 @@ h2, h3, h4, h5, h6 {
 .search_box .title_sct {
     margin-bottom: 1rem;
 }
+
+.page_shop {
+    display: grid;
+    grid-template-columns: 1.5fr 0.5fr; /* Two equal columns */
+    height: 100vh;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.page_shop section {
+    background-color: var(--color-light-gray);
+    border-radius: 10px;
+    height: 100%;
+}
+
+.title_sct {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.cart-section {
+    display: none; /* Hide cart section by default */
+}
+
+.cart-visible .cart-section {
+    display: block; /* Show cart when the `cart-visible` class is added */
+}
+
+.cart_sct h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+/* For medium/small screens */
+@media (max-width: 768px) {
+    .page_shop {
+        grid-template-columns: 1fr; /* Stack sections vertically */
+    }
+
+    .content {
+        display: block;
+    }
+
+    .toggle_cart_btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: var(--color-orange);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .cart-section.hide {
+        display: none;
+    }
+
+    .cart-section.show {
+        display: block;
+    }
+}
