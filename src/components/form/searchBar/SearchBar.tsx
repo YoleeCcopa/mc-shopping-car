@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./SearchBar.module.css";
+import "./../../../assets/_icon.css";
 
 interface Probs {
     id: string;
@@ -22,14 +23,31 @@ const SearchBar = ({ id: key, onSearchChange }: Probs) => {
 
     return (
         <div className={styles.search_bar}>
-            <div className={styles.input_container}>
-                <input className={styles.search_txt} id={key} 
-                type="text" 
-                onChange={handleChange}
-                value={searchTerm}/>
-                <button className={styles.clear_btn} onClick={handleClear}>Clear</button>
+            <input className={styles.search_txt}
+            id={key} 
+            type="text" 
+            onChange={handleChange}
+            value={searchTerm}
+            aria-describedby={`${key}-label`}/>
+
+            <div className={styles.input_actions}>
+            {searchTerm ? (
+                <button
+                className={styles.clear_btn}
+                onClick={handleClear}
+                aria-label="Clear search term">
+                    <i className="uil__multiply"></i>
+                </button>
+            ) : (
+                <label
+                className={styles.label}
+                htmlFor={key}
+                id={`${key}-label`}>
+                    <i className="uil__search-alt" aria-hidden="true"></i>
+                    <span className={styles.sr_only}>Search product</span>
+                </label>
+            )}
             </div>
-            <label className={styles.label} htmlFor={key}>Search</label>
         </div>
     )
 }

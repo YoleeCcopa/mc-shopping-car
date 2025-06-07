@@ -77,14 +77,16 @@ function App() {
 
     return (
         <>
-            <h1>E-commerce</h1>
-            <br/>
-            <h2>Product in stock</h2>
-            <br/>
-            <SearchBar id='search_product' onSearchChange={handleSearchChange}/>
+        <main>
+            <h1 className='title'>Akabeko e-shop</h1>
+            <div className='search_box'>
+                <h2 className='title_sct'>Products in stock</h2>
+                <SearchBar id='search_product' onSearchChange={handleSearchChange}/>
+            </div>
             <ProductDisplay data={productState} dispatch={dispatch}/>
             <h2>Shopping cart</h2>
             <CartDisplay data={cartStatus} dispatch={dispatch}/>
+        </main>
         </>
     )
 }

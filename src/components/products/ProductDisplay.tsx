@@ -1,6 +1,7 @@
 import type { CartActions } from '../../features/reducers/CartActionTypes';
 import type { Producto } from '../../types/Types';
 import ProductItem from './ProductItem';
+import styles from './ProductDisplay.module.css';
 
 interface Props {
     data: Producto[];
@@ -9,12 +10,18 @@ interface Props {
 
 const ProductDisplay = ({ data, dispatch }: Props) => {
     return (
-        <div>
-            {data.map((item) => (
-                <div key={item.id}>
+        <div className={styles.displayer}>
+            {data.length === 0 ? (
+                <div className={styles.alert}>
+                    <p>None found!</p>
+                </div>
+            ) : (
+            data.map((item) => (
+                <div key={item.id} className={styles.card}>
                     <ProductItem data={item} dispatch={dispatch}/>
                 </div>
-            ))}
+            ))
+            )}
         </div>
     )
 }

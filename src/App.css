@@ -28,3 +28,20 @@ h1 {
 h2, h3, h4, h5, h6 {
     font-family: var(--font-enriqueta);
 }
+
+.title {
+    padding: 1rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.search_box {
+    padding: 1rem;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    font-size: 1.5rem;
+}
+
+.search_box .title_sct {
+    margin-bottom: 1rem;
+}
